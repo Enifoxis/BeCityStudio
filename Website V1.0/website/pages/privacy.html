@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy – BeCityStudio</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <div id="settings-panel" class="settings-panel">
+    <button id="settings-toggle" class="settings-toggle" title="Settings"><i class="fas fa-cog"></i></button>
+    <div class="settings-content">
+      <h4>Settings</h4>
+      <div class="setting-item">
+        <label>Music</label>
+        <select id="music-select">
+          <option value="none">None</option>
+          <option value="ambient1">Ambient Soft</option>
+          <option value="ambient2">Chill Lo-Fi</option>
+        </select>
+      </div>
+      <div class="setting-item">
+        <label>Volume</label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.15" />
+      </div>
+      <div class="setting-item">
+        <label>Theme</label>
+        <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i> <span>Dark</span></button>
+      </div>
+      <div class="setting-item">
+        <label>Language</label>
+        <select id="lang-select">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <audio id="bg-music" loop preload="auto"></audio>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shield-alt"></i> <span data-i18n="logo">BeCityStudio</span></a>
+      <nav class="nav-links">
+        <a href="../index.html" data-i18n="nav_home">Home</a>
+        <a href="rules.html" data-i18n="nav_rules">Rules</a>
+        <a href="download.html" data-i18n="nav_download">Download</a>
+        <a href="credits.html" data-i18n="nav_credits">Credits</a>
+        <a href="social.html" data-i18n="nav_social">Social</a>
+        <a href="updates.html" data-i18n="nav_updates">Updates</a>
+        <a href="news.html" data-i18n="nav_news">News</a>
+        <a href="search.html" data-i18n="nav_search">Search</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <section class="page-header fade-in">
+    <h1 data-i18n="privacy_title">Privacy Policy</h1>
+    <p>Last updated: September 2026</p>
+  </section>
+
+  <section class="page-content">
+    <div class="legal-content fade-in">
+      <h2>1. Introduction</h2>
+      <p>This Privacy Policy explains how BeCityStudio ("we", "us") collects, uses and protects information when you visit our website.</p>
+
+      <h2>2. Information We Collect</h2>
+      <p>We do not collect personal data by default. The following may be stored locally in your browser:</p>
+      <ul>
+        <li>Theme preference (dark / light mode)</li>
+        <li>Language preference</li>
+        <li>Music and volume settings</li>
+      </ul>
+      <p>These settings are stored only in your browser's localStorage and are never sent to our servers.</p>
+
+      <h2>3. Cookies</h2>
+      <p>This website currently does not use tracking cookies or third-party analytics. Only essential local storage is used for user preferences.</p>
+
+      <h2>4. Third-Party Services</h2>
+      <p>We load Font Awesome icons from a CDN (cdnjs.cloudflare.com). No personal data is shared with this service by us.</p>
+
+      <h2>5. Your Rights</h2>
+      <p>You can clear all stored preferences at any time by clearing your browser's local storage for this site.</p>
+
+      <h2>6. Contact</h2>
+      <p>If you have questions about this privacy policy, please contact us via the channels listed on the Social page or in the Imprint.</p>
+
+      <h2>7. Changes</h2>
+      <p>We may update this policy from time to time. The "Last updated" date at the top will reflect the most recent version.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-links">
+        <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="imprint.html" data-i18n="footer_imprint">Imprint</a>
+      </div>
+      <p class="copyright">&copy; 2026 BeCityStudio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

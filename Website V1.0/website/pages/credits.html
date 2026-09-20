@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credits – BeCityStudio</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <div id="settings-panel" class="settings-panel">
+    <button id="settings-toggle" class="settings-toggle" title="Settings"><i class="fas fa-cog"></i></button>
+    <div class="settings-content">
+      <h4>Settings</h4>
+      <div class="setting-item">
+        <label>Music</label>
+        <select id="music-select">
+          <option value="none">None</option>
+          <option value="ambient1">Ambient Soft</option>
+          <option value="ambient2">Chill Lo-Fi</option>
+        </select>
+      </div>
+      <div class="setting-item">
+        <label>Volume</label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.15" />
+      </div>
+      <div class="setting-item">
+        <label>Theme</label>
+        <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i> <span>Dark</span></button>
+      </div>
+      <div class="setting-item">
+        <label>Language</label>
+        <select id="lang-select">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <audio id="bg-music" loop preload="auto"></audio>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shield-alt"></i> <span data-i18n="logo">BeCityStudio</span></a>
+      <nav class="nav-links">
+        <a href="../index.html" data-i18n="nav_home">Home</a>
+        <a href="rules.html" data-i18n="nav_rules">Rules</a>
+        <a href="download.html" data-i18n="nav_download">Download</a>
+        <a href="credits.html" class="active" data-i18n="nav_credits">Credits</a>
+        <a href="social.html" data-i18n="nav_social">Social</a>
+        <a href="updates.html" data-i18n="nav_updates">Updates</a>
+        <a href="news.html" data-i18n="nav_news">News</a>
+        <a href="search.html" data-i18n="nav_search">Search</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <section class="page-header fade-in">
+    <h1 data-i18n="credits_title">Credits & Team</h1>
+    <p data-i18n="credits_subtitle">The people who make this community possible.</p>
+  </section>
+
+  <section class="page-content">
+    <!-- Leadership -->
+    <div class="credits-section fade-in">
+      <h2><i class="fas fa-crown"></i> <span data-i18n="leadership">Leadership</span></h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="../assets/images/enifoxis.jpeg" alt="Enifoxis" class="avatar" />
+          <h3>Enifoxis</h3>
+          <div class="role">Owner</div>
+        </div>
+        <div class="team-card">
+          <img src="https://ui-avatars.com/api/?name=MMario44&background=9b7fff&color=fff&size=128" alt="MMario44" class="avatar" />
+          <h3>MMario44</h3>
+          <div class="role">Co-Owner</div>
+        </div>
+        <div class="team-card">
+          <img src="https://ui-avatars.com/api/?name=Liam&background=48dbfb&color=fff&size=128" alt="Liam" class="avatar" />
+          <h3>Liam</h3>
+          <div class="role">Director</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dev Team -->
+    <div class="credits-section fade-in">
+      <h2><i class="fas fa-code"></i> <span data-i18n="devteam">Dev Team</span></h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="https://ui-avatars.com/api/?name=TGIMB&background=2ecc71&color=fff&size=128" alt="TGIMB" class="avatar" />
+          <h3>TGIMB</h3>
+          <div class="role">Developer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Head of -->
+    <div class="credits-section fade-in">
+      <h2><i class="fas fa-user-tie"></i> <span data-i18n="headof">Head of</span></h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="https://ui-avatars.com/api/?name=Brett&background=e74c3c&color=fff&size=128" alt="Brett" class="avatar" />
+          <h3>Brett</h3>
+          <div class="role">Head of</div>
+        </div>
+        <div class="team-card">
+          <img src="https://ui-avatars.com/api/?name=Rain+Playlist&background=3498db&color=fff&size=128" alt="Rain Playlist" class="avatar" />
+          <h3>Rain Playlist</h3>
+          <div class="role">Head of</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Moderation / Admin -->
+    <div class="credits-section fade-in">
+      <h2><i class="fas fa-shield-alt"></i> <span data-i18n="moderation">Moderation</span></h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="https://ui-avatars.com/api/?name=Lsgadmin&background=1abc9c&color=fff&size=128" alt="Lsgadmin" class="avatar" />
+          <h3>Lsgadmin</h3>
+          <div class="role">Senior Admin</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-links">
+        <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="imprint.html" data-i18n="footer_imprint">Imprint</a>
+      </div>
+      <p class="copyright">&copy; 2026 BeCityStudio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

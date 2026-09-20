@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rules – BeCityStudio</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    /* Accordion – Rules page only */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .accordion-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+    .accordion-item:hover,
+    .accordion-item.open {
+      border-color: var(--accent);
+    }
+    .accordion-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      transition: background 0.2s ease;
+    }
+    .accordion-header:hover {
+      background: rgba(124, 92, 252, 0.06);
+    }
+    .accordion-header i.chevron {
+      color: var(--accent);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .accordion-item.open .accordion-header i.chevron {
+      transform: rotate(180deg);
+    }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      padding: 0 1.4rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+    .accordion-item.open .accordion-body {
+      max-height: 3000px;
+      padding: 0 1.4rem 1.3rem;
+    }
+    .accordion-body p {
+      margin-bottom: 0.7rem;
+    }
+    .accordion-body p:last-child {
+      margin-bottom: 0;
+    }
+    .accordion-body ul {
+      padding-left: 1.3rem;
+      margin: 0.5rem 0 0.7rem;
+    }
+    .accordion-body li {
+      margin-bottom: 0.35rem;
+    }
+    .accordion-body h4 {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      margin: 1rem 0 0.4rem;
+    }
+    .accordion-body h4:first-child {
+      margin-top: 0.2rem;
+    }
+    .rule-intro {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin: 0 auto 1.8rem;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="settings-panel" class="settings-panel">
+    <button id="settings-toggle" class="settings-toggle" title="Settings"><i class="fas fa-cog"></i></button>
+    <div class="settings-content">
+      <h4>Settings</h4>
+      <div class="setting-item">
+        <label>Music</label>
+        <select id="music-select">
+          <option value="none">None</option>
+          <option value="ambient1">Ambient Soft</option>
+          <option value="ambient2">Chill Lo-Fi</option>
+        </select>
+      </div>
+      <div class="setting-item">
+        <label>Volume</label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.15" />
+      </div>
+      <div class="setting-item">
+        <label>Theme</label>
+        <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i> <span>Dark</span></button>
+      </div>
+      <div class="setting-item">
+        <label>Language</label>
+        <select id="lang-select">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <audio id="bg-music" loop preload="auto"></audio>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shield-alt"></i> <span data-i18n="logo">BeCityStudio</span></a>
+      <nav class="nav-links">
+        <a href="../index.html" data-i18n="nav_home">Home</a>
+        <a href="rules.html" class="active" data-i18n="nav_rules">Rules</a>
+        <a href="download.html" data-i18n="nav_download">Download</a>
+        <a href="credits.html" data-i18n="nav_credits">Credits</a>
+        <a href="social.html" data-i18n="nav_social">Social</a>
+        <a href="updates.html" data-i18n="nav_updates">Updates</a>
+        <a href="news.html" data-i18n="nav_news">News</a>
+        <a href="search.html" data-i18n="nav_search">Search</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <section class="page-header fade-in">
+    <h1 data-i18n="rules_title">Community Rules</h1>
+    <p data-i18n="rules_subtitle">Please read and follow these guidelines carefully.</p>
+  </section>
+
+  <section class="page-content">
+    <div class="rules-tabs">
+      <button class="tab-btn active" data-tab="ingame" data-i18n="tab_ingame">In-Game Rules</button>
+      <button class="tab-btn" data-tab="social" data-i18n="tab_social">Social / Discord Rules</button>
+      <button class="tab-btn" data-tab="punish" data-i18n="tab_punish">Punishments</button>
+    </div>
+
+    <!-- ========== IN-GAME RULES ========== -->
+    <div id="ingame" class="tab-content active">
+      <p class="rule-intro">These rules apply to Oakride State Roleplay. Click a section to expand or collapse it.</p>
+
+      <div class="accordion">
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 0 — Ruleset Information <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>This ruleset is divided into three sections:</p>
+            <h4>1. General Rules</h4>
+            <p>The General Rules apply to all Oakride State Roleplay servers and apply universally throughout the game. These rules are binding on all players, regardless of which type of server they are playing on.</p>
+            <h4>2. Roleplay Server Rules</h4>
+            <p>The Roleplay Server Rules apply to all official Roleplay servers provided by Oakride State Roleplay. These rules also apply to Roleplay servers operated by other parties. On private servers, the Roleplay Server Rules may be modified, activated, or deactivated by the private server owner or their authorized team.</p>
+            <h4>3. Private Server Rules</h4>
+            <p>The Private Server Rules apply exclusively to the staff and team members of private servers. These rules govern the operation and management of private servers.</p>
+            <p>There are three different types of servers:</p>
+            <h4>Standard Servers</h4>
+            <p>Standard Servers are subject only to the General Rules.</p>
+            <h4>Roleplay Servers</h4>
+            <p>Roleplay Servers are subject to both the General Rules and the Roleplay Server Rules.</p>
+            <h4>Private Servers</h4>
+            <p>Private Servers are subject to the General Rules and the Private Server Rules. The Roleplay Server Rules may additionally be activated or deactivated by the private server owner or their authorized team.</p>
+            <p>Only Section 2 — Roleplay Server Rules — may be modified on private servers. The General Rules and Private Server Rules may not be modified or overridden by private server owners or their teams.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 1 — Scope of the Rules <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>1.1</strong> These rules apply to every player who participates in Oakride State Roleplay. All rules must be followed at all times and without exception. They do not apply only during Roleplay situations or while actively playing in-game, but are binding at all times.</p>
+            <p><strong>1.2</strong> No player, member, staff member, or other person is above these rules. The rules apply equally to everyone, regardless of their position, rank, role, or status within the community.</p>
+            <p><strong>1.3</strong> No player may create, establish, or enforce their own rules outside of the official ruleset. If a player discovers a loophole, ambiguity, or missing regulation within the rules, they are required to report it to the responsible staff members immediately. Exploiting a loophole does not exempt a player from punishment and may result in appropriate sanctions.</p>
+            <p><strong>1.4</strong> The only way in which a rule may be deviated from is through an officially recognized precedent or a specific ruling established by the responsible staff team. Such a precedent must be officially recognized and may not be created or claimed by individual players.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 2 — Precedents <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>2.1</strong> A precedent may be requested by opening a Management Ticket in the official Oakride State Roleplay Discord.</p>
+            <p><strong>2.2</strong> All currently valid precedents can be viewed in the designated channel under the Rules section.</p>
+            <p><strong>2.3</strong> Precedents do not have an unlimited duration. Every precedent is valid only for a specified period and expires on a predetermined date.</p>
+            <p><strong>2.4</strong> A player who wishes to rely on a precedent must provide the relevant precedent themselves. The staff member reviewing the situation is not required to search for a precedent on behalf of the player. The player must be able to demonstrate that the precedent exists and applies to their situation.</p>
+            <p><strong>2.5</strong> A precedent does not apply to an entire rule unless explicitly stated. A precedent may only apply to the specific part or section of a rule for which it was established.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 3 — Rule Ambiguity and Duty to Inquire <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>3.1</strong> Not knowing or being unaware of a rule does not protect a player from sanctions. Every player is responsible for knowing and following the rules outlined in the official Oakride State Roleplay ruleset.</p>
+            <p><strong>3.2</strong> If a player does not understand a rule, is unsure how a rule applies, or does not know how a specific situation should be handled, they are required to ask for clarification.</p>
+            <p><strong>3.3</strong> Players may request clarification either through Discord or through the in-game chat. If a staff member is available, players may ask them directly for clarification regarding the relevant rule or situation.</p>
+            <p><strong>3.4</strong> Failing to ask for clarification when a player is unsure about a rule does not exempt them from possible sanctions.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 4 — In-Game Chat <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>4.1</strong> The in-game chat must be used appropriately and respectfully. Every player is responsible for ensuring that their messages do not unnecessarily disrupt the gameplay experience of others.</p>
+            <p><strong>4.2</strong> Profanity and vulgar language are generally permitted as long as they are not directed at another player or used in a manner that violates any other rule. Words such as “shit” or “fuck” may be used when they are not directed against another person.</p>
+            <p><strong>4.3</strong> Insults may be permitted within Roleplay when they are clearly part of the Roleplay situation and are directed at a character rather than the player behind the character. Minor insults such as “idiot,” “stupid,” “dumb,” or similar expressions may therefore be used within an appropriate RP context.</p>
+            <p><strong>4.4</strong> Insults that are directed at a player outside of Roleplay (OC) are not permitted. This also applies when a player attempts to justify an otherwise inappropriate insult by claiming that it was intended as Roleplay.</p>
+            <p><strong>4.5</strong> Severe, degrading, or highly offensive insults are prohibited, regardless of whether they are used in or outside of Roleplay. This includes, but is not limited to, terms such as “bastard,” “son of a bitch,” or similarly severe personal insults. Such statements may result in sanctions.</p>
+            <p><strong>4.6</strong> The distinction between IC (In Character) and OC (Out of Character) must be clear. Players may not use Roleplay as an excuse to personally attack, harass, or demean another player.</p>
+            <p><strong>4.7</strong> Discriminatory, hateful, threatening, or otherwise severely inappropriate language is prohibited in the in-game chat, regardless of whether it is claimed to be part of Roleplay.</p>
+            <p><strong>4.8</strong> Spam, excessive repetition of messages, unnecessary flooding of the chat, and intentional disruption of communication through the in-game chat are prohibited.</p>
+            <p><strong>4.9</strong> Staff members may take action against inappropriate chat behavior even if a specific type of statement is not explicitly listed in this section. The decisive factor is the context, intent, and severity of the statement.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 5 — Voice Chat <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>5.1</strong> The Voice Chat must be used appropriately and must not be used to unnecessarily disrupt, disturb, or negatively affect the Roleplay experience of other players.</p>
+            <p><strong>5.2</strong> Minor insults and profanity are permitted within Roleplay as long as they are clearly directed at a character and not at the player behind the character. The same standards and limitations described in § 4 — In-Game Chat apply to the Voice Chat.</p>
+            <p><strong>5.3</strong> Severe, degrading, hateful, discriminatory, or otherwise highly offensive insults are prohibited, regardless of whether they are used in or outside of Roleplay. Using Roleplay as an excuse does not make such statements permissible.</p>
+            <p><strong>5.4</strong> Players are strictly prohibited from impersonating, recreating, or portraying real-life individuals who are associated with extremist, terrorist, genocidal, or otherwise severely criminal or inhumane acts. This includes, but is not limited to, Roleplay based on historical figures or events involving such acts.</p>
+            <p><strong>5.5</strong> The use of Soundboards to imitate, portray, or reproduce real-life individuals described in § 5.4 is strictly prohibited. This includes speeches, recordings, audio clips, or other material associated with such individuals or events.</p>
+            <p><strong>5.6</strong> Soundboards are generally permitted when they are used appropriately within Roleplay. Examples include vehicle crash sounds, hospital monitor sounds, environmental sounds, vehicle sounds, or music used as part of an RP situation.</p>
+            <p><strong>5.7</strong> Soundboard sounds and music must be used at a reasonable volume and for a reasonable duration. They must not unnecessarily disturb other players or interfere with ongoing Roleplay. Playing sounds at an excessive volume or in a manner that allows them to be heard over unreasonable distances is prohibited.</p>
+            <p><strong>5.8</strong> Music played through the Voice Chat or a Soundboard must not contain severe insults, hateful content, discriminatory statements, or other prohibited material directed at other players or individuals.</p>
+            <p><strong>5.9</strong> Players may not use the Voice Chat to intentionally spam sounds, repeatedly activate a Soundboard, excessively play music, scream, make unnecessarily loud noises, or otherwise disrupt communication or Roleplay.</p>
+            <p><strong>5.10</strong> The sharing, requesting, or disclosure of private or personal information through the Voice Chat is strictly prohibited. This includes, but is not limited to, phone numbers, home addresses, exact locations, passwords, private contact information, or other personal information that is not intended to be publicly shared.</p>
+            <p><strong>5.11</strong> Players must respect the privacy of other players at all times. Personal information may not be disclosed, requested, or used to target, harass, threaten, or identify another player.</p>
+            <p><strong>5.12</strong> Attempting to circumvent any Voice Chat restriction, mute, or other sanction by using alternative accounts, Soundboards, external audio sources, or other methods is prohibited.</p>
+            <p><strong>5.13</strong> Staff members may take appropriate action against Voice Chat behavior that is inappropriate, disruptive, or harmful to the community even if the specific behavior is not explicitly listed in this section. The context, intent, and severity of the behavior will be taken into consideration.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 6 — Cheating, Glitching, Mechanic Abuse &amp; Game Pass Abuse <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>6.1</strong> Cheating, Glitching, Mechanic Abuse, and Game Pass Abuse are generally permitted in Singleplayer and in private or non-public Co-op sessions that are accessible only to the player and/or their invited friends, provided that they do not involve or affect public servers, other players outside of the private session, or the game's online services.</p>
+            <p><strong>6.2</strong> Cheating, Glitching, Mechanic Abuse, and Game Pass Abuse are strictly prohibited on public Multiplayer or Server environments. Players may not use, activate, distribute, or intentionally exploit such methods to gain an unfair advantage over other players or to negatively affect the public server experience.</p>
+            <p><strong>6.3</strong> Any form of cheating, exploiting, or manipulation that damages, disrupts, crashes, corrupts, or otherwise negatively affects the game, a server, another player's experience, or the game's online services is strictly prohibited in every game mode, including Singleplayer and private Co-op.</p>
+            <p><strong>6.4</strong> Exploiting glitches or unintended game mechanics is prohibited on public Multiplayer and Server environments when the exploit provides an unintended advantage, bypasses intended gameplay restrictions, or negatively affects other players.</p>
+            <p><strong>6.5</strong> Mechanic Abuse refers to intentionally using game mechanics in a way that clearly goes beyond their intended purpose in order to gain an unfair advantage, bypass restrictions, or negatively affect other players. Such behavior is prohibited on public Multiplayer and Server environments.</p>
+            <p><strong>6.6</strong> Game Pass Abuse includes any attempt to obtain, activate, unlock, use, or access a Game Pass, DLC, premium feature, or other paid content without legitimately owning or purchasing it. Any attempt to bypass, manipulate, or circumvent the game's purchase or authorization system is strictly prohibited in every game mode.</p>
+            <p><strong>6.7</strong> Players may not use unauthorized software, modified game files, external tools, scripts, exploits, or other methods to bypass intended game restrictions or obtain content they are not legitimately entitled to use.</p>
+            <p><strong>6.8</strong> The intentional distribution, publication, or instruction of exploits, cheats, unauthorized tools, or methods designed to abuse the game's systems on public servers is prohibited. This includes knowingly providing such methods to other players for the purpose of gaining an unfair advantage.</p>
+            <p><strong>6.9</strong> A player may not claim that an exploit is permitted simply because it is technically possible within the game. The intended purpose of the mechanic and the circumstances in which it is used determine whether its use constitutes Mechanic Abuse or an exploit.</p>
+            <p><strong>6.10</strong> Any behavior covered by this section that affects public servers, other players, the game's online services, or the integrity of the game may result in sanctions, regardless of whether the behavior was performed intentionally or through the use of third-party software, modified files, exploits, or unintended game mechanics.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 7 — Staff Impersonation &amp; Ban Evasion <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>7.1</strong> Impersonating a staff member is strictly prohibited on all public servers, including Standard Servers, Roleplay Servers, and other publicly accessible servers. Players may not claim, falsely represent, or otherwise give the impression that they are a member of the Oakride State Roleplay staff team when they are not.</p>
+            <p><strong>7.2</strong> Staff impersonation is also prohibited on publicly accessible Co-op servers. This includes falsely claiming to have staff permissions, authority, access, or responsibilities that the player does not actually possess.</p>
+            <p><strong>7.3</strong> Suspension and Ban Evasion are strictly prohibited on Multiplayer, public Co-op, and Server environments. A player who has received a suspension or ban may not use another account, identity, or other method to circumvent or avoid the applied punishment.</p>
+            <p><strong>7.4</strong> Ban and Suspension Evasion does not apply to Singleplayer. Singleplayer is an unrestricted game mode in which players cannot be banned or suspended from participating in their own session.</p>
+            <p><strong>7.5</strong> Players may not use alternative accounts, account sharing, technical workarounds, or other methods to circumvent a suspension or ban on Multiplayer, public Co-op, or Server environments.</p>
+            <p><strong>7.6</strong> Attempting to circumvent a punishment remains a violation even if the player is unsuccessful. The attempt itself may be subject to sanctions.</p>
+            <p><strong>7.7</strong> Staff members may take appropriate action against any behavior that intentionally attempts to misrepresent staff authority or circumvent an active suspension or ban, even if the specific method used is not explicitly listed in this section.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 8 — Account Sharing &amp; Account Security <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>8.1</strong> Account Sharing is strictly prohibited unless an officially recognized precedent explicitly permits it. Players may not share their Oakride State Roleplay account with another person without a valid precedent.</p>
+            <p><strong>8.2</strong> Every player is fully responsible for the security and use of their own account. Players are responsible for all activity carried out through their account, regardless of who was using the account at the time.</p>
+            <p><strong>8.3</strong> Using another player's account is strictly prohibited unless the account owner has given explicit permission and an officially recognized precedent permits such use. Permission from the account owner alone is not sufficient when a precedent is required.</p>
+            <p><strong>8.4</strong> Using another person's account to circumvent a Suspension, Ban, or other punishment is strictly prohibited. If a player uses a friend's, family member's, or another person's account to continue playing while their own account is suspended or banned, the player may receive an additional punishment, including a Ban.</p>
+            <p><strong>8.5</strong> Players must never share their passwords, login credentials, authentication information, or other sensitive account information with another person. Players should keep all account information confidential and take appropriate measures to protect their account from unauthorized access.</p>
+            <p><strong>8.6</strong> Players must not share private information associated with their account or information accessible through the Profile section with other persons unless it is necessary for an officially authorized purpose.</p>
+            <p><strong>8.7</strong> Oakride State Roleplay Staff Members will never request a player's password, login credentials, or other sensitive account information through In-Game Chat, Voice Chat, direct messages, or other unofficial communication methods.</p>
+            <p><strong>8.8</strong> In exceptional circumstances where account credentials or other sensitive account information are genuinely required for an official investigation or technical matter, the request must be made through an official Support Ticket and handled by a member of the Management Team.</p>
+            <p><strong>8.9</strong> Any request for sensitive account information made under § 8.8 must be independently confirmed by a second authorized senior team member before the player provides any such information. Players are encouraged to verify the request with another senior team member if they are unsure whether the request is legitimate.</p>
+            <p><strong>8.10</strong> Players should never provide account credentials merely because someone claims to be a Staff Member. If a player is unsure whether a request is legitimate, they should refuse to provide the information and contact the Staff or Management Team through the official Support system.</p>
+            <p><strong>8.11</strong> Players may not attempt to obtain, steal, access, or use another player's account or account credentials without authorization. This includes attempting to gain access through deception, social engineering, unauthorized software, or other methods.</p>
+            <p><strong>8.12</strong> Any attempt to compromise, misuse, or gain unauthorized access to another player's account may result in severe sanctions.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 9 — Fraud, Scamming &amp; Unauthorized Transactions <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>9.1</strong> Scamming is strictly prohibited throughout Oakride State Roleplay. This applies regardless of where the scam takes place, including In-Game, through Discord, through the official Oakride State Roleplay website, or through any other platform used in connection with Oakride State Roleplay.</p>
+            <p><strong>9.2</strong> Players may not intentionally deceive, manipulate, or mislead another player in order to obtain In-Game money, vehicles, items, services, or other In-Game assets without providing the agreed return or consideration.</p>
+            <p><strong>9.3</strong> In-Game trading is generally permitted as long as the transaction involves only legitimate In-Game assets and does not involve real-world money or other forms of real-world compensation. Players may, for example, trade In-Game money or vehicles with other players.</p>
+            <p><strong>9.4</strong> Players may not trade or exchange any In-Game asset for real-world money, goods, services, or other real-world compensation. This is considered Real-World Trading (RWT) and is strictly prohibited.</p>
+            <p><strong>9.5</strong> Real-World Trading includes, but is not limited to, transactions such as offering a player €100 in real life in exchange for 100,000 In-Game currency, or offering any other real-world payment in exchange for In-Game assets.</p>
+            <p><strong>9.6</strong> Game Passes, DLCs, premium content, paid features, or other content that requires real-world payment may not be traded, sold, exchanged, or transferred between players unless Oakride State Roleplay explicitly provides an official system that permits such transactions.</p>
+            <p><strong>9.7</strong> Players may not sell, purchase, or exchange any In-Game asset that was obtained through a real-money purchase for another player's benefit or for real-world compensation.</p>
+            <p><strong>9.8</strong> Unauthorized transactions, fraudulent purchases, payment manipulation, chargeback abuse, or attempts to obtain paid content without legitimately paying for it are strictly prohibited.</p>
+            <p><strong>9.9</strong> Players may not use false claims, fake transactions, manipulated screenshots, fabricated payment confirmations, or similar methods to convince another player that a transaction has been completed when it has not.</p>
+            <p><strong>9.10</strong> Players are responsible for verifying their own transactions before completing a trade. Oakride State Roleplay is not required to restore, replace, or reimburse assets lost through a legitimate player-to-player transaction, including transactions that were completed voluntarily.</p>
+            <p><strong>9.11</strong> Players may not use third parties, alternative accounts, external platforms, private agreements, or other methods to circumvent these restrictions.</p>
+            <p><strong>9.12</strong> Fraud, Scamming, Real-World Trading, and unauthorized transactions may result in severe sanctions depending on circumstances, value, intent, and impact.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 10 — Reporting Abuse <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>10.1</strong> The Reporting System must only be used for legitimate reports involving actual or suspected violations of the Oakride State Roleplay rules. Players must not submit reports without a reasonable basis.</p>
+            <p><strong>10.2</strong> Submitting a report against another player solely because their Roleplay is particularly intense, they are trolling within the permitted rules, they are annoying the reporting player personally, or they are otherwise behaving in a way that the reporting player dislikes is prohibited if no rule violation has occurred.</p>
+            <p><strong>10.3</strong> Players may not use the Reporting System to report another player simply because they disagree with their behavior, Roleplay decisions, playstyle, or actions when those actions do not violate any applicable rule.</p>
+            <p><strong>10.4</strong> Knowingly submitting false, baseless, or intentionally misleading reports may result in sanctions. This includes reporting a player while knowing that the reported behavior does not violate any applicable rule.</p>
+            <p><strong>10.5</strong> The Reporting System may not be abused to intentionally interrupt, delay, or disrupt an ongoing Roleplay situation. Players may not submit reports for the purpose of forcing Staff Members to intervene in an otherwise legitimate Roleplay situation.</p>
+            <p><strong>10.6</strong> Players may not use reports as a tool to harass, annoy, threaten, pressure, or otherwise target another player.</p>
+            <p><strong>10.7</strong> Players may not intentionally submit reports in an attempt to cause another player to receive a Suspension, Ban, Warning, or other punishment when the reporting player knows that there is no legitimate basis for such action.</p>
+            <p><strong>10.8</strong> Repeatedly abusing the Reporting System, even if individual reports do not result in a punishment, may itself constitute a rule violation. The Staff Team may consider the player's reporting history, intent, frequency, and circumstances when determining whether sanctions are appropriate.</p>
+            <p><strong>10.9</strong> Players are encouraged to report genuine rule violations even when they are unsure whether the reported behavior constitutes a violation. A good-faith report that is ultimately determined to be unfounded will not automatically constitute Reporting Abuse.</p>
+            <p><strong>10.10</strong> The Staff Team may take appropriate action against any misuse of the Reporting System that negatively affects other players, ongoing Roleplay, or the ability of Staff Members to properly investigate legitimate reports.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 12 — Harassment &amp; Targeting <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>12.1</strong> Harassment and Targeting are prohibited on Multiplayer servers, publicly accessible Co-op servers, and Servers operated by Oakride State Roleplay or other parties when the behavior exceeds a reasonable and acceptable level.</p>
+            <p><strong>12.2</strong> Players may not repeatedly target another player with the intention of continuously killing, disturbing, annoying, insulting, harassing, or otherwise negatively affecting that player's gameplay experience.</p>
+            <p><strong>12.3</strong> Minor trolling and short-term targeting are not automatically considered a violation. Light trolling for a limited period of time, such as approximately 10–15 minutes, may be permitted when it remains within a reasonable scope and does not significantly disrupt the other player's gameplay or an ongoing Roleplay situation.</p>
+            <p><strong>12.4</strong> Players may engage in minor interactions that temporarily inconvenience another player as part of normal gameplay. Examples include briefly following another player, temporarily blocking a road, or causing a player to take another route. Such actions are not automatically considered Harassment or Targeting when they remain within a reasonable and limited scope.</p>
+            <p><strong>12.5</strong> Repeatedly seeking out the same player for the primary purpose of disturbing them may constitute Harassment or Targeting when the behavior becomes excessive. Repeatedly finding and confronting the same player solely to disrupt their gameplay is prohibited when it exceeds a reasonable level.</p>
+            <p><strong>12.6</strong> Repeatedly attacking or killing the same player whenever they are encountered is prohibited when the behavior is clearly intended to target that specific player rather than being part of a legitimate gameplay or Roleplay situation.</p>
+            <p><strong>12.7</strong> Continuously remaining around, following, insulting, provoking, or otherwise harassing a specific player for an extended period of time is prohibited. Behavior lasting approximately 30–40 minutes or longer may be considered a clear indication of excessive and targeted harassment, depending on the circumstances.</p>
+            <p><strong>12.8</strong> Players may not intentionally follow or pursue another player from one Roleplay situation to another for the purpose of continuing to disturb, harass, attack, or otherwise interfere with that player.</p>
+            <p><strong>12.9</strong> Players may not intentionally involve or encourage other players to participate in the harassment, targeting, or disruption of a specific player. Organizing or coordinating multiple players for the purpose of repeatedly targeting another player is strictly prohibited.</p>
+            <p><strong>12.10</strong> Personal conflicts between players must not be carried into the game in a manner that results in repeated or excessive targeting, harassment, or disruption of another player's gameplay experience.</p>
+            <p><strong>12.11</strong> Legitimate Roleplay, normal gameplay interactions, rivalries, conflicts, arrests, pursuits, combat situations, or repeated encounters do not automatically constitute Harassment or Targeting. The context, intent, frequency, duration, and impact of the behavior will be considered when determining whether a violation has occurred.</p>
+            <p><strong>12.12</strong> The Staff Team may take appropriate action when behavior exceeds a reasonable level and becomes clearly disruptive, excessive, or targeted, even if no individual action would constitute a violation on its own.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">§ 13 — Privacy &amp; Personal Information <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p><strong>13.1</strong> The sharing, publishing, requesting, or disclosure of another person's private or personal information is strictly prohibited. This applies regardless of whether the information is shared through In-Game Chat, Voice Chat, Multiplayer, Co-op, Servers, or any other feature or communication method connected to Oakride State Roleplay.</p>
+            <p><strong>13.2</strong> Players must provide accurate and truthful personal information when creating or managing their Oakride State Roleplay account whenever such information is required by the account system. This includes providing the correct date of birth, age, name, or other information requested by the official account system.</p>
+            <p><strong>13.3</strong> Personal information provided to Oakride State Roleplay during account creation or account management is intended for authorized Oakride State Roleplay use and must not be publicly displayed or disclosed to other players without appropriate authorization.</p>
+            <p><strong>13.4</strong> Players may not intentionally provide false personal information to Oakride State Roleplay in order to obtain access to an age-restricted feature, enter an incorrect age group, bypass an age restriction, circumvent another account restriction, or otherwise gain an advantage.</p>
+            <p><strong>13.5</strong> Players may not impersonate another real person by providing or using that person's personal information when creating or managing an Oakride State Roleplay account.</p>
+            <p><strong>13.6</strong> Players must not disclose, publish, or distribute their own or another person's private information to other players. This includes, but is not limited to, home addresses, phone numbers, passwords, private account information, exact real-world locations, email addresses, or other sensitive personal information.</p>
+            <p><strong>13.7</strong> Players may not use private or sensitive personal information as a publicly visible username, display name, character name, or other identifier when doing so would expose that information to other players. This includes email addresses, phone numbers, home addresses, passwords, or similar private information.</p>
+            <p><strong>13.8</strong> Players may not attempt to obtain another player's private information through deception, manipulation, intimidation, social engineering, or other unauthorized methods.</p>
+            <p><strong>13.9</strong> Doxxing, threatening to disclose personal information, or using personal information to harass, intimidate, target, or otherwise harm another person is strictly prohibited.</p>
+            <p><strong>13.10</strong> Players must not pressure, encourage, or force another player to reveal private or personal information. A player's private information must be respected at all times.</p>
+            <p><strong>13.11</strong> Personal information provided to Oakride State Roleplay may only be requested or accessed by authorized Staff Members when there is a legitimate reason to do so. Staff Members must not request personal information through unofficial communication methods.</p>
+            <p><strong>13.12</strong> Any violation of this section may result in sanctions. Providing intentionally false account information, exposing another person's private information, or using personal information to bypass restrictions may result in severe sanctions.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ========== DISCORD / SOCIAL RULES ========== -->
+    <div id="social" class="tab-content">
+      <p class="rule-intro">Welcome to the BeCityStudio Discord server. Please follow these rules to keep the community safe and respectful.</p>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header">Be Respectful <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Treat everyone with respect regardless of nationality, gender, religion, language, or background.</p>
+            <p>Insults, toxic behavior, harassment, discrimination, or intentionally provoking others is not allowed.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">No Spam or Flooding <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Do not spam messages, emojis, mentions, or links.</p>
+            <p>Repeated messages or excessive pinging (including @everyone or constant pings to users) is not allowed.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Use the Correct Channels <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Every channel has a specific purpose. Please follow the channel descriptions.</p>
+            <p>Keep conversations relevant to the channel topic. Game questions, bug reports, and development discussions should be posted in the appropriate channels.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">No Advertising <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Advertising other Discord servers, YouTube channels, Twitch streams, websites, or products is not allowed without permission from an admin.</p>
+            <p>Self-promotion is only allowed in channels specifically created for that purpose.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">No NSFW or Illegal Content <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Sexual, violent, or otherwise inappropriate content is strictly forbidden.</p>
+            <p>Sharing hacks, cracks, cheats, DDoS tools, or other illegal content will result in an immediate ban.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Respect Privacy <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Do not share personal information about yourself or others.</p>
+            <p>Do not post screenshots of private messages or voice chats without permission.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Follow the Staff Team <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Moderators and admins are responsible for keeping the server safe. Please follow their instructions.</p>
+            <p>If you disagree with a moderation decision, discuss it privately with the staff.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Rule Violations and Consequences <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Breaking the rules may result in warnings, temporary mutes, kicks, or permanent bans depending on the severity.</p>
+            <p>The server team reserves the right to take action even in situations not explicitly covered by these rules.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Have Fun <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Enjoy the community, share your ideas, help improve the game, and respect other members.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== PUNISHMENTS ========== -->
+    <div id="punish" class="tab-content">
+      <p class="rule-intro">This section explains how reporting works and how the punishment system is applied on Oakride State Roleplay.</p>
+
+      <div class="accordion">
+        <!-- Reporting -->
+        <div class="accordion-item">
+          <button class="accordion-header">Reporting Players on Public Servers <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Players can report other players on all publicly accessible Oakride State Roleplay servers, including Standard Servers, public Co-op Servers, and Roleplay Servers.</p>
+            <p>Reports can be submitted directly in-game using the available report commands, such as /mod, /staff, or /help. Once a report has been submitted, a staff member will review the situation and observe the reported player where necessary.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Evidence Requests <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>If additional evidence, such as a video clip, is required to investigate a report, the reporting player may be contacted through an in-game panel or message. The player will then be provided with the appropriate option to submit their evidence through the designated website.</p>
+            <p>Players should provide a clip whenever possible. If no evidence is available, Oakride State Roleplay may not be able to take action due to insufficient evidence.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Reporting Through the Website <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Players may also report another player through the official Oakride State Roleplay website by accessing Support and creating a Support Ticket.</p>
+            <p>When submitting a report through the website, the following information should be provided:</p>
+            <ul>
+              <li>Player name of the reported person</li>
+              <li>Your email address</li>
+              <li>The general category of the incident (for example Cheating, Abuse, or another rule violation)</li>
+              <li>The server or game mode in which the incident occurred</li>
+              <li>A detailed description of exactly what happened</li>
+              <li>Any available evidence, such as screenshots, video clips, or other relevant material</li>
+            </ul>
+            <p>The more detailed and accurate the report is, the easier it is for the staff team to investigate the situation.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Reporting Through Discord <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Players may also report other players through the official Oakride State Roleplay Discord server by opening a Support Ticket.</p>
+            <p>Briefly explain what happened and provide any available evidence, such as a screenshot or video clip. The staff team will then review the report and take appropriate action if necessary.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">False or Abusive Reports <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Reports must be submitted honestly and in good faith. Intentionally submitting false reports, fabricating evidence, or repeatedly abusing the reporting system may result in sanctions.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Punishment Appeals <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Punishment appeals can currently be submitted through the official Oakride State Roleplay Discord Support system. In the future, punishment appeals will also be available through the official website Support system.</p>
+            <ul>
+              <li>If a player has received a Suspension or a punishment below a Temporary Ban, they must open a Support Ticket to submit an appeal.</li>
+              <li>If a player has received a Temporary Ban, Ban, or Permanent Ban, they must open a Management Ticket to submit an appeal.</li>
+              <li>After opening a Management Ticket for a Temporary Ban, Ban, or Permanent Ban, the player will receive an appeal form. The form must be completed fully and truthfully before the appeal can be reviewed.</li>
+              <li>Once the completed form has been submitted, the Management Team will review the appeal and the circumstances surrounding the punishment.</li>
+              <li>Players will generally receive a response within approximately one week. The decision may result in the punishment being removed, reduced, modified, upheld, or may require the player to wait for a specified period before further action can be taken.</li>
+              <li>Submitting an appeal does not automatically suspend, remove, or shorten an active punishment. The punishment remains active until an official decision has been made.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Punishment types -->
+        <div class="accordion-item">
+          <button class="accordion-header">General Punishment System <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>Oakride State Roleplay uses five different types of punishments: Notes, Warnings, Temporary Bans, Bans, and Permanent Bans. The type and severity of a punishment depend on the violation, its circumstances, and the player's previous history.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Note <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>A Note is the lowest form of punishment and is primarily used as an internal record for the Staff Team.</p>
+            <p>A Note may be issued for minor violations, misunderstandings, unclear situations, or situations where a higher punishment is not considered necessary. Notes allow other staff members to be aware of previous incidents involving a player.</p>
+            <p>Notes do not automatically expire and are not counted as Warnings. Having multiple Notes does not automatically result in a Warning, Temporary Ban, or Ban.</p>
+            <p>A player may request the removal of a Note if the Note is no longer relevant or no longer serves a meaningful purpose. The Staff Team will decide whether the Note should be removed.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Warning <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>A Warning is a more serious punishment and is issued when a player has clearly violated the rules.</p>
+            <p>A Warning remains active for two months. Once a Warning has been active for two months, the player may request its removal.</p>
+            <p>Warnings are counted towards the player's active Warning limit. Notes do not count towards this limit.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Temporary Ban <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>A Temporary Ban is a temporary restriction from Oakride State Roleplay. The duration depends on the severity and circumstances of the violation.</p>
+            <p>A Temporary Ban may also be automatically issued when a player reaches the required number of active Warnings.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Ban <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>A Ban is a more serious restriction from Oakride State Roleplay. Unlike a Temporary Ban, a Ban does not automatically expire.</p>
+            <p>A player who receives a Ban must submit a Punishment Appeal in order to request an unban. The decision to accept or deny an appeal is made by the responsible Staff or Management Team.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Permanent Ban <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>A Permanent Ban is the most severe punishment available within Oakride State Roleplay.</p>
+            <p>A Permanent Ban normally does not have a regular unban process. Players may still submit a Punishment Appeal; however, such appeals are highly unlikely to be accepted and may be reviewed depending on the circumstances and severity of the violation.</p>
+            <p>A Permanent Ban may prevent the affected player from accessing or using Oakride State Roleplay and its associated services. This may include access to the game, online services, Multiplayer, Servers, Co-op, and the ability to download or access game assets.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Warning Escalation System <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>The Warning system follows a progressive escalation structure.</p>
+
+            <h4>First Warning Stage</h4>
+            <p>A player may have up to four active Warnings. If a player receives four active Warnings within a period of two months, the player will receive a Temporary Ban of one week.</p>
+            <p>After the one-week Temporary Ban has expired, the player will automatically be unbanned and all four active Warnings will be removed. The player's Warning limit will then be reduced to three active Warnings.</p>
+
+            <h4>Second Warning Stage</h4>
+            <p>After the player's Warning limit has been reduced to three, the player must remain free of Warnings for two months in order to return to the previous Warning limit.</p>
+            <p>If the player receives three active Warnings within three months, the player will receive a Temporary Ban of two months. After the two-month Temporary Ban has expired, the player will automatically be unbanned. The player's Warning limit will remain at three.</p>
+
+            <h4>Third Warning Stage</h4>
+            <p>If the player reaches three active Warnings again within six months, the player will receive a Ban. This Ban does not automatically expire. The player must submit a Punishment Appeal in order to request an unban.</p>
+
+            <h4>Resetting the Warning Stage</h4>
+            <p>If a player remains completely free of Warnings for the required period, their Warning stage may be reset according to the applicable progression rules.</p>
+            <p>After receiving the one-week Temporary Ban for reaching four Warnings, a player must remain free of Warnings for two months to return to the normal limit of four active Warnings. Once the Warning stage has been reset, the progression system begins again from the first Warning stage.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Warning Removal <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>A player may request the removal of an individual Warning once that Warning has been active for at least two months.</p>
+            <p>The removal of a Warning does not automatically remove other active Warnings or reset the player's Warning stage unless the applicable reset requirements have also been fulfilled.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">Staff Discretion <i class="fas fa-chevron-down chevron"></i></button>
+          <div class="accordion-body">
+            <p>The Staff Team may apply a different punishment when the circumstances, severity, intent, previous history, or impact of a violation justify doing so.</p>
+            <p>The Warning escalation system is intended as a standard progression system and does not prevent the Staff or Management Team from taking appropriate action in serious or exceptional cases.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-links">
+        <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="imprint.html" data-i18n="footer_imprint">Imprint</a>
+      </div>
+      <p class="copyright">&copy; 2026 BeCityStudio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // Accordion toggle
+    document.querySelectorAll('.accordion-header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const wasOpen = item.classList.contains('open');
+        // Optional: close others in same accordion
+        // item.closest('.accordion').querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+        item.classList.toggle('open', !wasOpen);
+      });
+    });
+  </script>
+</body>
+</html>

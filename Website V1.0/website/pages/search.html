@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search – BeCityStudio</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <div id="settings-panel" class="settings-panel">
+    <button id="settings-toggle" class="settings-toggle" title="Settings"><i class="fas fa-cog"></i></button>
+    <div class="settings-content">
+      <h4>Settings</h4>
+      <div class="setting-item">
+        <label>Music</label>
+        <select id="music-select">
+          <option value="none">None</option>
+          <option value="ambient1">Ambient Soft</option>
+          <option value="ambient2">Chill Lo-Fi</option>
+        </select>
+      </div>
+      <div class="setting-item">
+        <label>Volume</label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.15" />
+      </div>
+      <div class="setting-item">
+        <label>Theme</label>
+        <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i> <span>Dark</span></button>
+      </div>
+      <div class="setting-item">
+        <label>Language</label>
+        <select id="lang-select">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <audio id="bg-music" loop preload="auto"></audio>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><i class="fas fa-shield-alt"></i> <span data-i18n="logo">BeCityStudio</span></a>
+      <nav class="nav-links">
+        <a href="../index.html" data-i18n="nav_home">Home</a>
+        <a href="rules.html" data-i18n="nav_rules">Rules</a>
+        <a href="download.html" data-i18n="nav_download">Download</a>
+        <a href="credits.html" data-i18n="nav_credits">Credits</a>
+        <a href="social.html" data-i18n="nav_social">Social</a>
+        <a href="updates.html" data-i18n="nav_updates">Updates</a>
+        <a href="news.html" data-i18n="nav_news">News</a>
+        <a href="search.html" class="active" data-i18n="nav_search">Search</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <section class="page-header fade-in">
+    <h1 data-i18n="search_title">Search</h1>
+    <p data-i18n="search_subtitle">Find pages and content quickly.</p>
+  </section>
+
+  <section class="page-content">
+    <div class="search-box fade-in">
+      <i class="fas fa-search"></i>
+      <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Type to search…" autocomplete="off" />
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-links">
+        <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="imprint.html" data-i18n="footer_imprint">Imprint</a>
+      </div>
+      <p class="copyright">&copy; 2026 BeCityStudio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
